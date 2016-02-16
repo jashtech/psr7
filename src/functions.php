@@ -74,7 +74,7 @@ function uri_for($uri)
  * @return Stream
  * @throws \InvalidArgumentException if the $resource arg is not valid.
  */
-function stream_for($resource = '', array $options = [])
+function stream_for($resource = '', array $options = array())
 {
     switch (gettype($resource)) {
         case 'string':
@@ -126,10 +126,10 @@ function stream_for($resource = '', array $options = [])
 function parse_header($header)
 {
     static $trimmed = "\"'  \n\t\r";
-    $params = $matches = [];
+    $params = $matches = array();
 
     foreach (normalize_header($header) as $val) {
-        $part = [];
+        $part = array();
         foreach (preg_split('/;(?=([^"]*"[^"]*")*[^"]*$)/', $val) as $kvp) {
             if (preg_match_all('/<[^>]+>|[^=]+/', $kvp, $matches)) {
                 $m = $matches[0];
@@ -162,7 +162,7 @@ function normalize_header($header)
         return array_map('trim', explode(',', $header));
     }
 
-    $result = [];
+    $result = array();
     foreach ($header as $value) {
         foreach ((array) $value as $v) {
             if (strpos($v, ',') === false) {
@@ -211,7 +211,7 @@ function modify_request(RequestInterface $request, array $changes)
             $changes['set_headers']['Host'] = $host;
 
             if ($port = $changes['uri']->getPort()) {
-                $standardPorts = ['http' => 80, 'https' => 443];
+                $standardPorts = array('http' => 80, 'https' => 443);
                 $scheme = $changes['uri']->getScheme();
                 if (isset($standardPorts[$scheme]) && $port != $standardPorts[$scheme]) {
                     $changes['set_headers']['Host'] .= ':'.$port;
@@ -448,7 +448,7 @@ function readline(StreamInterface $stream, $maxLength = null)
 function parse_request($message)
 {
     $data = _parse_message($message);
-    $matches = [];
+    $matches = array();
     if (!preg_match('/^[a-zA-Z]+\s+([a-zA-Z]+:\/\/|\/).*/', $data['start-line'], $matches)) {
         throw new \InvalidArgumentException('Invalid request string');
     }
@@ -505,7 +505,7 @@ function parse_response($message)
  */
 function parse_query($str, $urlEncoding = true)
 {
-    $result = [];
+    $result = array();
 
     if ($str === '') {
         return $result;
@@ -614,7 +614,7 @@ function mimetype_from_filename($filename)
  */
 function mimetype_from_extension($extension)
 {
-    static $mimetypes = [
+    static $mimetypes = array(
         '7z' => 'application/x-7z-compressed',
         'aac' => 'audio/x-aac',
         'ai' => 'application/postscript',
@@ -713,7 +713,7 @@ function mimetype_from_extension($extension)
         'yaml' => 'text/yaml',
         'yml' => 'text/yaml',
         'zip' => 'application/zip',
-    ];
+    );
 
     $extension = strtolower($extension);
 
@@ -742,7 +742,7 @@ function _parse_message($message)
 
     // Iterate over each line in the message, accounting for line endings
     $lines = preg_split('/(\\r?\\n)/', $message, -1, PREG_SPLIT_DELIM_CAPTURE);
-    $result = ['start-line' => array_shift($lines), 'headers' => [], 'body' => ''];
+    $result = array('start-line' => array_shift($lines), 'headers' => array(), 'body' => '');
     array_shift($lines);
 
     for ($i = 0, $totalLines = count($lines); $i < $totalLines; $i += 2) {
@@ -794,7 +794,7 @@ function _parse_request_uri($path, array $headers)
 /** @internal */
 function _caseless_remove($keys, array $data)
 {
-    $result = [];
+    $result = array();
 
     foreach ($keys as &$key) {
         $key = strtolower($key);
