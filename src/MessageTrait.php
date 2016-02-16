@@ -9,10 +9,10 @@ use Psr\Http\Message\StreamInterface;
 trait MessageTrait
 {
     /** @var array Cached HTTP header collection with lowercase key to values */
-    private $headers = [];
+    private $headers = array();
 
     /** @var array Actual key to list of values per header. */
-    private $headerLines = [];
+    private $headerLines = array();
 
     /** @var string */
     private $protocol = '1.1';
@@ -64,7 +64,7 @@ trait MessageTrait
         $name = strtolower($header);
 
         if (!is_array($value)) {
-            $new->headers[$name] = [trim($value)];
+            $new->headers[$name] = array(trim($value));
         } else {
             $new->headers[$name] = $value;
             foreach ($new->headers[$name] as &$v) {
@@ -138,7 +138,7 @@ trait MessageTrait
 
     private function setHeaders(array $headers)
     {
-        $this->headerLines = $this->headers = [];
+        $this->headerLines = $this->headers = array();
         foreach ($headers as $header => $value) {
             $header = trim($header);
             $name = strtolower($header);
