@@ -6,19 +6,19 @@ use Psr\Http\Message\StreamInterface;
 /**
  * Trait implementing functionality common to requests and responses.
  */
-trait MessageTrait
+abstract class MessageTrait
 {
     /** @var array Cached HTTP header collection with lowercase key to values */
-    private $headers = array();
+    protected $headers = array();
 
     /** @var array Actual key to list of values per header. */
-    private $headerLines = array();
+    protected $headerLines = array();
 
     /** @var string */
-    private $protocol = '1.1';
+    protected $protocol = '1.1';
 
     /** @var StreamInterface */
-    private $stream;
+    protected $stream;
 
     public function getProtocolVersion()
     {
@@ -136,7 +136,7 @@ trait MessageTrait
         return $new;
     }
 
-    private function setHeaders(array $headers)
+    protected function setHeaders(array $headers)
     {
         $this->headerLines = $this->headers = array();
         foreach ($headers as $header => $value) {

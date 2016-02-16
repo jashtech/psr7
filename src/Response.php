@@ -6,10 +6,8 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * PSR-7 response implementation.
  */
-class Response implements ResponseInterface
+class Response extends MessageTrait implements ResponseInterface
 {
-    use MessageTrait;
-
     /** @var array Map of standard HTTP status code/reason phrases */
     private static $phrases = array(
         100 => 'Continue',

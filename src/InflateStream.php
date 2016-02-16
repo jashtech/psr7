@@ -14,10 +14,8 @@ use Psr\Http\Message\StreamInterface;
  * @link http://tools.ietf.org/html/rfc1952
  * @link http://php.net/manual/en/filters.compression.php
  */
-class InflateStream implements StreamInterface
+class InflateStream extends StreamDecoratorTrait implements StreamInterface
 {
-    use StreamDecoratorTrait;
-
     public function __construct(StreamInterface $stream)
     {
         // Skip the first 10 bytes
