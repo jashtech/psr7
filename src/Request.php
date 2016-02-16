@@ -36,7 +36,7 @@ class Request implements RequestInterface
     public function __construct(
         $method,
         $uri,
-        array $headers = [],
+        array $headers = array(),
         $body = null,
         $protocolVersion = '1.1'
     ) {
@@ -143,7 +143,7 @@ class Request implements RequestInterface
             $host .= ':' . $port;
         }
 
-        $this->headerLines = ['Host' => [$host]] + $this->headerLines;
-        $this->headers = ['host' => [$host]] + $this->headers;
+        $this->headerLines = array('Host' => array($host)) + $this->headerLines;
+        $this->headers = array('host' => array($host)) + $this->headers;
     }
 }
