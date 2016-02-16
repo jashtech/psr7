@@ -66,7 +66,7 @@ class FnStream implements StreamInterface
         // If any of the required methods were not provided, then simply
         // proxy to the decorated stream.
         foreach (array_diff(self::$slots, array_keys($methods)) as $diff) {
-            $methods[$diff] = [$stream, $diff];
+            $methods[$diff] = array($stream, $diff);
         }
 
         return new self($methods);
