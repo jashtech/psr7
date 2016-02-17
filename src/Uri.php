@@ -205,7 +205,8 @@ class Uri implements UriInterface
 
         $result = array();
         foreach (explode('&', $current) as $part) {
-            if (explode('=', $part)[0] !== $key) {
+            $partArray = explode('=', $part);
+            if ($partArray[0] !== $key) {
                 $result[] = $part;
             };
         }
@@ -237,7 +238,8 @@ class Uri implements UriInterface
         } else {
             $result = array();
             foreach (explode('&', $current) as $part) {
-                if (explode('=', $part)[0] !== $key) {
+                $partArray = explode('=', $part);
+                if ($partArray[0] !== $key) {
                     $result[] = $part;
                 };
             }

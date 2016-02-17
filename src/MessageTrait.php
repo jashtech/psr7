@@ -49,7 +49,7 @@ abstract class MessageTrait
     public function getHeader($header)
     {
         $name = strtolower($header);
-        return isset($this->headers[$name]) ? $this->headers[$name] : [];
+        return isset($this->headers[$name]) ? $this->headers[$name] : array();
     }
 
     public function getHeaderLine($header)
